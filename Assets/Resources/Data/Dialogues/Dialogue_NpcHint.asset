@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 596e17aa7e335ea4199df2a8fff1334f, type: 3}
+  m_Name: Dialogue_NpcHint
+  m_EditorClassIdentifier: 
+  dialogueId: dialog.sample
+  lines:
+  - speakerName: "\u964C\u751F\u4EBA"
+    content: "\u4F60\u4E5F\u5728\u627E\u4FDD\u9669\u7BB1\u5BC6\u7801\uFF1F"
+    eventKey: 
+  - speakerName: "\u964C\u751F\u4EBA"
+    content: "\u6211\u53EA\u8BB0\u5F97\u540E\u4E24\u4F4D\u662F\u201C26\u201D\u3002"
+    eventKey: 
+  - speakerName: "\u73A9\u5BB6"
+    content: "\u524D\u4E24\u4F4D\u4E5F\u8BB8\u5728\u522B\u5904\u3002"
+    eventKey: 

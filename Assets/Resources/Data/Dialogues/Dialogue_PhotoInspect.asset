@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 596e17aa7e335ea4199df2a8fff1334f, type: 3}
+  m_Name: Dialogue_PhotoInspect
+  m_EditorClassIdentifier: 
+  dialogueId: dialog.sample
+  lines:
+  - speakerName: "\u73A9\u5BB6"
+    content: "\u8FD9\u662F\u4E00\u5F20\u5F88\u65E7\u7684\u7167\u7247\u3002"
+    eventKey: 
+  - speakerName: "\u73A9\u5BB6"
+    content: "\u7167\u7247\u80CC\u9762\u5199\u7740\u201C04\u201D\u3002"
+    eventKey: 
