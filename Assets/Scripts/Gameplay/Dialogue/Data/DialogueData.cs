@@ -14,10 +14,12 @@ namespace BS.Gameplay.Dialogue.Data
         [SerializeField] private string speakerName = "角色";
         [SerializeField] [TextArea(2, 6)] private string content = "对白内容";
         [SerializeField] private string eventKey;
+        [SerializeField] private Sprite portrait;
 
         public string SpeakerName => speakerName;
         public string Content => content;
         public string EventKey => eventKey;
+        public Sprite Portrait => portrait;
     }
 
     /// <summary>

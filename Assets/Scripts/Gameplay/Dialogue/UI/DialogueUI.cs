@@ -1,6 +1,7 @@
 using BS.Gameplay.Dialogue.Data;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using BS.Core;
 
 namespace BS.Gameplay.Dialogue.UI
@@ -17,6 +18,8 @@ namespace BS.Gameplay.Dialogue.UI
         [SerializeField] private TMP_Text speakerNameText;
         [SerializeField] private TMP_Text contentText;
         [SerializeField] private TMP_Text pageIndicatorText;
+        [SerializeField] private Image portraitImage;
+        [SerializeField] private GameObject portraitRoot;
 
         private void Awake()
         {
@@ -52,6 +55,7 @@ namespace BS.Gameplay.Dialogue.UI
 
         private void Start()
         {
+            RefreshPortrait(null);
             SetRootVisible(false);
         }
 
@@ -76,6 +80,8 @@ namespace BS.Gameplay.Dialogue.UI
             {
                 pageIndicatorText.text = $"{lineIndex + 1}/{totalLineCount}";
             }
+
+            RefreshPortrait(line);
         }
 
         private void HandleDialogueEnded(DialogueData dialogueData)
@@ -95,6 +101,7 @@ namespace BS.Gameplay.Dialogue.UI
                 pageIndicatorText.text = string.Empty;
             }
 
+            RefreshPortrait(null);
             SetRootVisible(false);
         }
 
@@ -104,6 +111,32 @@ namespace BS.Gameplay.Dialogue.UI
             {
                 root.SetActive(visible);
             }
+        }
+
+        private void RefreshPortrait(DialogueLine line)
+        {
+            if (portraitImage == null)
+            {
+                if (portraitRoot != null)
+                {
+                    portraitRoot.SetActive(false);
+                }
+
+                return;
+            }
+
+            var portrait = line != null ? line.Portrait : null;
+            var hasPortrait = portrait != null;
+
+            portraitImage.sprite = portrait;
+
+            if (portraitRoot != null)
+            {
+                portraitRoot.SetActive(hasPortrait);
+                return;
+            }
+
+            portraitImage.gameObject.SetActive(hasPortrait);
         }
     }
 }

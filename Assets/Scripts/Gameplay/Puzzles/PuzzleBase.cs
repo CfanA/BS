@@ -106,6 +106,30 @@ namespace BS.Gameplay.Puzzles
             OnRestoredAsSolved();
         }
 
+        public bool DebugMarkSolved()
+        {
+            var solved = SolvePuzzle();
+            if (solved)
+            {
+                Debug.Log($"[DebugPanel] 谜题已标记为完成: {name}", this);
+            }
+
+            return solved;
+        }
+
+        public void DebugResetToInactive()
+        {
+            SetState(PuzzleState.Inactive);
+            RefreshAvailability();
+            Debug.Log($"[DebugPanel] 谜题已重置: {name}", this);
+        }
+
+        public void DebugRefreshAvailability()
+        {
+            RefreshAvailability();
+            Debug.Log($"[DebugPanel] 谜题可用性已刷新: {name} -> {State}", this);
+        }
+
         protected void SetState(PuzzleState nextState)
         {
             if (State == nextState)

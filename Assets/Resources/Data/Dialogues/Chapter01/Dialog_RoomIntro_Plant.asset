@@ -10,13 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 596e17aa7e335ea4199df2a8fff1334f, type: 3}
-  m_Name: Dialogue_PhotoInspect
+  m_Name: Dialog_RoomIntro_Plant
   m_EditorClassIdentifier: 
   dialogueId: dialog.sample
   lines:
-  - speakerName: "\u73A9\u5BB6"
-    content: "\u5DEE\u70B9\u5FD8\u4E86\u8FD9\u4E2A\u3002"
+  - speakerName: "\u4E3B\u89D2"
+    content: "\u4ED6\u603B\u8BF4\u6211\u517B\u4EC0\u4E48\u90FD\u50CF\u5FEB\u6B7B\u4E86\u4E00\u6837\u3002"
     eventKey: 
-  - speakerName: "\u73A9\u5BB6"
-    content: "\u4ED6\u8BF4\u8FD9\u5468\u60F3\u79CD\u8FD9\u51E0\u79CD\u82B1\u3002"
-    eventKey: 
+    portrait: {fileID: 21300000, guid: 341e14244c862f944af413b391a3e609, type: 3}

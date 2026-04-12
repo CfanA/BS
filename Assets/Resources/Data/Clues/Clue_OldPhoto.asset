@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Clue_OldPhoto
   m_EditorClassIdentifier: 
   clueId: clue.old_photo
-  displayName: "\u65E7\u7167\u7247"
-  description: "\u7167\u7247\u80CC\u9762\u5199\u7740\u201C04\u201D\uFF0C\u770B\u8D77\u6765\u50CF\u67D0\u79CD\u5BC6\u7801\u7684\u4E00\u90E8\u5206\u3002"
+  displayName: "\u79CD\u5B50\u888B"
+  description: "\u5DEE\u70B9\u5FD8\u4E86\u8FD9\u4E2A\u3002"
   icon: {fileID: 0}
   category: "\u623F\u95F4\u7EBF\u7D22"

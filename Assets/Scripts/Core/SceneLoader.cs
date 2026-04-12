@@ -43,6 +43,9 @@ namespace BS.Core
 
         private SpawnPointId _pendingSpawnPointId;
 
+        public SceneId LastRequestedSceneId { get; private set; }
+        public SpawnPointId LastRequestedSpawnPointId { get; private set; }
+
         public bool IsLoading { get; private set; }
 
         public event Action<SceneId> BeforeSceneLoad;
@@ -82,6 +85,8 @@ namespace BS.Core
                 return;
             }
 
+            LastRequestedSceneId = sceneId;
+            LastRequestedSpawnPointId = targetSpawnPointId;
             _pendingSpawnPointId = targetSpawnPointId;
             StartCoroutine(LoadSceneRoutine(sceneId, transition ?? DefaultTransition));
         }

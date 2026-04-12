@@ -587,7 +587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 668ced9a3d52bfd4fb99db7a3de4b5cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPointId: door.from_room_a
+  spawnPointId: entry.room_intro_exit
   isDefaultSpawn: 0
 --- !u!1 &701068790
 GameObject:
