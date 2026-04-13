@@ -25,17 +25,20 @@ namespace BS.Gameplay.Story
         [SerializeField] private StoryAction[] actions;
 
         private bool _hasTriggeredThisSession;
+        private FlagManager _flagManager;
+        private bool _isSubscribed;
 
         private void OnEnable()
         {
-            if (GameManager.Instance != null && GameManager.Instance.Flags != null && evaluateOnFlagChanged)
-            {
-                GameManager.Instance.Flags.FlagChanged += HandleFlagChanged;
-            }
+            TryBindFlagManager();
+            TrySubscribeFlagChanged();
         }
 
         private void Start()
         {
+            TryBindFlagManager();
+            TrySubscribeFlagChanged();
+
             if (evaluateOnStart)
             {
                 TryExecute();
@@ -44,9 +47,10 @@ namespace BS.Gameplay.Story
 
         private void OnDisable()
         {
-            if (GameManager.Instance != null && GameManager.Instance.Flags != null && evaluateOnFlagChanged)
+            if (_flagManager != null && _isSubscribed)
             {
-                GameManager.Instance.Flags.FlagChanged -= HandleFlagChanged;
+                _flagManager.FlagChanged -= HandleFlagChanged;
+                _isSubscribed = false;
             }
         }
 
@@ -83,6 +87,25 @@ namespace BS.Gameplay.Story
         private void HandleFlagChanged(FlagId flagId, bool value)
         {
             TryExecute();
+        }
+
+        private void TryBindFlagManager()
+        {
+            if (_flagManager == null && GameManager.Instance != null)
+            {
+                _flagManager = GameManager.Instance.Flags;
+            }
+        }
+
+        private void TrySubscribeFlagChanged()
+        {
+            if (!evaluateOnFlagChanged || _flagManager == null || _isSubscribed)
+            {
+                return;
+            }
+
+            _flagManager.FlagChanged += HandleFlagChanged;
+            _isSubscribed = true;
         }
 
         private bool HasTriggered(FlagManager flagManager)

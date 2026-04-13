@@ -14,17 +14,34 @@ namespace BS.Gameplay.UI
     /// </summary>
     public sealed class ItemPickupToastUI : MonoBehaviour
     {
+        private enum HideMode
+        {
+            ByDuration,
+            OnDialogueEnded
+        }
+
+        [System.Serializable]
+        private struct ItemToastDisplayOverride
+        {
+            public ItemData itemData;
+            public HideMode hideMode;
+            public float displayDuration;
+        }
+
         private readonly Queue<ItemToastRequest> _pendingRequests = new();
 
         [Header("依赖引用")]
         [SerializeField] private InventoryManager inventoryManager;
+        [SerializeField] private Dialogue.DialogueManager dialogueManager;
         [SerializeField] private GameObject root;
         [SerializeField] private Image iconImage;
         [SerializeField] private TMP_Text itemNameText;
         [SerializeField] private TMP_Text amountText;
 
         [Header("显示配置")]
+        [SerializeField] private HideMode hideMode = HideMode.ByDuration;
         [SerializeField] private float displayDuration = 1.5f;
+        [SerializeField] private ItemToastDisplayOverride[] itemDisplayOverrides;
 
         private Coroutine _playRoutine;
         private bool _isSubscribed;
@@ -32,11 +49,13 @@ namespace BS.Gameplay.UI
         private void Awake()
         {
             TryBindInventoryManager();
+            TryBindDialogueManager();
         }
 
         private void OnEnable()
         {
             TryBindInventoryManager();
+            TryBindDialogueManager();
 
             if (inventoryManager == null || _isSubscribed)
             {
@@ -93,9 +112,7 @@ namespace BS.Gameplay.UI
                 var request = _pendingRequests.Dequeue();
                 RefreshView(request.ItemData, request.Amount);
                 SetRootVisible(true);
-
-                var duration = Mathf.Max(0.1f, displayDuration);
-                yield return new WaitForSeconds(duration);
+                yield return WaitForHideCondition(request.ItemData);
 
                 SetRootVisible(false);
             }
@@ -146,6 +163,56 @@ namespace BS.Gameplay.UI
             if (inventoryManager == null && GameManager.Instance != null)
             {
                 inventoryManager = GameManager.Instance.Inventory;
+            }
+        }
+
+        private void TryBindDialogueManager()
+        {
+            if (dialogueManager == null && GameManager.Instance != null)
+            {
+                dialogueManager = GameManager.Instance.Dialogue;
+            }
+        }
+
+        private IEnumerator WaitForHideCondition(ItemData itemData)
+        {
+            var resolvedHideMode = hideMode;
+            var resolvedDuration = displayDuration;
+            ResolveDisplaySettings(itemData, ref resolvedHideMode, ref resolvedDuration);
+
+            switch (resolvedHideMode)
+            {
+                case HideMode.OnDialogueEnded:
+                    if (dialogueManager != null && dialogueManager.IsPlaying)
+                    {
+                        yield return new WaitUntil(() => dialogueManager == null || !dialogueManager.IsPlaying);
+                        yield break;
+                    }
+                    break;
+            }
+
+            var duration = Mathf.Max(0.1f, resolvedDuration);
+            yield return new WaitForSeconds(duration);
+        }
+
+        private void ResolveDisplaySettings(ItemData itemData, ref HideMode resolvedHideMode, ref float resolvedDuration)
+        {
+            if (itemData == null || itemDisplayOverrides == null || itemDisplayOverrides.Length == 0)
+            {
+                return;
+            }
+
+            for (var i = 0; i < itemDisplayOverrides.Length; i++)
+            {
+                var itemOverride = itemDisplayOverrides[i];
+                if (itemOverride.itemData != itemData)
+                {
+                    continue;
+                }
+
+                resolvedHideMode = itemOverride.hideMode;
+                resolvedDuration = itemOverride.displayDuration;
+                return;
             }
         }
 

@@ -1,14 +1,15 @@
+using System.Collections;
+using BS.Core;
 using BS.Gameplay.Dialogue.Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using BS.Core;
 
 namespace BS.Gameplay.Dialogue.UI
 {
     /// <summary>
     /// 对话 UI 控制器。
-    /// 只负责订阅 DialogueManager 事件并刷新界面，不参与对话流程控制。
+    /// 只负责监听 DialogueManager 事件并刷新界面，不参与对话流程控制。
     /// </summary>
     public sealed class DialogueUI : MonoBehaviour
     {
@@ -21,7 +22,12 @@ namespace BS.Gameplay.Dialogue.UI
         [SerializeField] private Image portraitImage;
         [SerializeField] private GameObject portraitRoot;
 
+        [Header("Typewriter")]
+        [SerializeField] private bool enableTypewriter = true;
+        [SerializeField] private float charactersPerSecond = 24f;
+
         private bool _isSubscribed;
+        private Coroutine _typewriterRoutine;
 
         private void Awake()
         {
@@ -45,6 +51,8 @@ namespace BS.Gameplay.Dialogue.UI
 
         private void OnDisable()
         {
+            StopTypewriter();
+
             if (dialogueManager == null || !_isSubscribed)
             {
                 return;
@@ -74,10 +82,7 @@ namespace BS.Gameplay.Dialogue.UI
                 speakerNameText.text = line != null ? line.SpeakerName : string.Empty;
             }
 
-            if (contentText != null)
-            {
-                contentText.text = line != null ? line.Content : string.Empty;
-            }
+            RefreshContent(line);
 
             if (pageIndicatorText != null)
             {
@@ -89,6 +94,8 @@ namespace BS.Gameplay.Dialogue.UI
 
         private void HandleDialogueEnded(DialogueData dialogueData)
         {
+            StopTypewriter();
+
             if (speakerNameText != null)
             {
                 speakerNameText.text = string.Empty;
@@ -140,6 +147,53 @@ namespace BS.Gameplay.Dialogue.UI
             }
 
             portraitImage.gameObject.SetActive(hasPortrait);
+        }
+
+        private void RefreshContent(DialogueLine line)
+        {
+            if (contentText == null)
+            {
+                return;
+            }
+
+            StopTypewriter();
+
+            var content = line != null ? line.Content : string.Empty;
+            if (!enableTypewriter || string.IsNullOrEmpty(content) || charactersPerSecond <= 0f)
+            {
+                contentText.text = content;
+                return;
+            }
+
+            _typewriterRoutine = StartCoroutine(PlayTypewriterRoutine(content));
+        }
+
+        private IEnumerator PlayTypewriterRoutine(string content)
+        {
+            contentText.text = string.Empty;
+
+            var interval = 1f / charactersPerSecond;
+            for (var i = 1; i <= content.Length; i++)
+            {
+                contentText.text = content.Substring(0, i);
+                if (i < content.Length)
+                {
+                    yield return new WaitForSeconds(interval);
+                }
+            }
+
+            _typewriterRoutine = null;
+        }
+
+        private void StopTypewriter()
+        {
+            if (_typewriterRoutine == null)
+            {
+                return;
+            }
+
+            StopCoroutine(_typewriterRoutine);
+            _typewriterRoutine = null;
         }
 
         private void TryBindDialogueManager()

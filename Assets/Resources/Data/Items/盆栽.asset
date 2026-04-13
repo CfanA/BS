@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6410aa7429f584e469a2e3b0ff3e99b8, type: 3}
-  m_Name: Item_SmallKey
+  m_Name: "\u76C6\u683D"
   m_EditorClassIdentifier: 
-  itemId: item.small_key
-  displayName: "\u5C0F\u94A5\u5319"
+  itemId: "\u76C6\u683D"
+  displayName: "\u76C6\u683D"
   description: "\u4E00\u628A\u4ECE\u4FDD\u9669\u7BB1\u91CC\u62FF\u5230\u7684\u5C0F\u94A5\u5319\u3002"
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 19163e46d3e05224ba7743d2e58dd1cd, type: 3}
   isUnique: 1

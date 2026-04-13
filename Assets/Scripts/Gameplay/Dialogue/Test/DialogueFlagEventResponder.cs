@@ -17,6 +17,7 @@ namespace BS.Gameplay.Dialogue.Test
             public string eventKey;
             public string flagId;
             public bool flagValue = true;
+            public bool applyOnDialogueEnded;
         }
 
         [Header("依赖引用")]
@@ -24,6 +25,8 @@ namespace BS.Gameplay.Dialogue.Test
 
         [Header("事件映射")]
         [SerializeField] private EventFlagBinding[] bindings;
+
+        private EventFlagBinding _pendingBinding;
 
         private void Awake()
         {
@@ -41,6 +44,7 @@ namespace BS.Gameplay.Dialogue.Test
             }
 
             dialogueManager.LineEventTriggered += HandleLineEventTriggered;
+            dialogueManager.DialogueEnded += HandleDialogueEnded;
         }
 
         private void OnDisable()
@@ -51,6 +55,7 @@ namespace BS.Gameplay.Dialogue.Test
             }
 
             dialogueManager.LineEventTriggered -= HandleLineEventTriggered;
+            dialogueManager.DialogueEnded -= HandleDialogueEnded;
         }
 
         private void HandleLineEventTriggered(string eventKey, Data.DialogueLine line, Data.DialogueData dialogueData)
@@ -70,10 +75,38 @@ namespace BS.Gameplay.Dialogue.Test
 
                 if (!string.IsNullOrWhiteSpace(binding.flagId))
                 {
-                    GameManager.Instance.Flags.SetFlag(new FlagId(binding.flagId), binding.flagValue);
-                    Debug.Log($"对话事件触发剧情 Flag: {binding.flagId} = {binding.flagValue}", this);
+                    if (binding.applyOnDialogueEnded)
+                    {
+                        _pendingBinding = binding;
+                    }
+                    else
+                    {
+                        ApplyBinding(binding, "对话事件触发剧情 Flag");
+                    }
                 }
             }
+        }
+
+        private void HandleDialogueEnded(Data.DialogueData dialogueData)
+        {
+            if (_pendingBinding == null)
+            {
+                return;
+            }
+
+            ApplyBinding(_pendingBinding, "对话结束后触发剧情 Flag");
+            _pendingBinding = null;
+        }
+
+        private void ApplyBinding(EventFlagBinding binding, string logPrefix)
+        {
+            if (binding == null || string.IsNullOrWhiteSpace(binding.flagId) || GameManager.Instance == null || GameManager.Instance.Flags == null)
+            {
+                return;
+            }
+
+            GameManager.Instance.Flags.SetFlag(new FlagId(binding.flagId), binding.flagValue);
+            Debug.Log($"{logPrefix}: {binding.flagId} = {binding.flagValue}", this);
         }
     }
 }

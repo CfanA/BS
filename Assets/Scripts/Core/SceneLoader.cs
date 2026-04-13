@@ -49,6 +49,7 @@ namespace BS.Core
         public bool IsLoading { get; private set; }
 
         public event Action<SceneId> BeforeSceneLoad;
+        public event Action<SceneId> SceneLoaded;
         public event Action<SceneId> AfterSceneLoaded;
 
         public void LoadScene(SceneId sceneId)
@@ -118,6 +119,7 @@ namespace BS.Core
                 yield return null;
             }
 
+            SceneLoaded?.Invoke(sceneId);
             yield return transition.PlayEnter();
 
             IsLoading = false;
