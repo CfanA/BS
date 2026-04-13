@@ -18,9 +18,21 @@ EditorBuildSettings:
     path: Assets/Scenes/Room_A.unity
     guid: a85ea097a155bb043800d889a57a4ec1
   - enabled: 1
-    path: "Assets/Scenes/\u7B2C\u4E00\u7AE0_\u573A\u666F0_\u4E3B\u89D2\u623F\u95F4.unity"
+    path: "Assets/Scenes/\u7B2C\u4E00\u7AE0/\u7B2C\u4E00\u7AE0_\u573A\u666F0_\u4E3B\u89D2\u623F\u95F4_\u5468\u65E5\u4E0A\u5348.unity"
     guid: 2001b665cce4f2e4ab43a5d8d15e614b
   - enabled: 1
-    path: "Assets/Scenes/\u7B2C\u4E00\u7AE0_\u573A\u666F1_\u82B1\u7530\u5C0F\u8DEF.unity"
+    path: "Assets/Scenes/\u7B2C\u4E00\u7AE0/\u7B2C\u4E00\u7AE0_\u573A\u666F1_\u6D17\u624B\u95F4_\u5468\u65E5\u4E0A\u5348.unity"
+    guid: e39609013d65fea40a6d77d42ab25943
+  - enabled: 1
+    path: "Assets/Scenes/\u7B2C\u4E00\u7AE0/\u7B2C\u4E00\u7AE0_\u573A\u666F2_\u82B1\u7530\u5C0F\u8DEF_\u5468\u65E5\u4E0A\u5348.unity"
     guid: 959b3f92cf06bdd4db835fac15a08fb9
+  - enabled: 1
+    path: "Assets/Scenes/\u7B2C\u4E00\u7AE0/\u7B2C\u4E00\u7AE0_\u573A\u666F3_\u623F\u95F4_\u5468\u65E5\u591C\u665A.unity"
+    guid: 2abafac6c3d8f6b4da30f1d4ebcdbb53
+  - enabled: 1
+    path: "Assets/Scenes/\u7B2C\u4E00\u7AE0/\u7B2C\u4E00\u7AE0_\u573A\u666F4_\u6559\u5BA4\u8D70\u5ECA.unity"
+    guid: 05052eccf2d4bcf4eb711a11637f0e9b
+  - enabled: 1
+    path: "Assets/Scenes/\u7B2C\u4E00\u7AE0/\u7B2C\u4E00\u7AE0_\u573A\u666F5_\u98DF\u5802_\u5468\u4E00\u4E2D\u5348.unity"
+    guid: 9864daac61508fe45b91e94f728ed483
   m_configObjects: {}

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 596e17aa7e335ea4199df2a8fff1334f, type: 3}
+  m_Name: "\u5BF9\u767D_\u573A\u666F3_\u4E66\u5305"
+  m_EditorClassIdentifier: 
+  dialogueId: dialog.sample
+  lines:
+  - speakerName: "\u4F60"
+    content: "\u62C9\u94FE\u62C9\u597D\u4E86\u3002\u4ED6\u7684\u4F5C\u4E1A\u672C\u2026\u2026\u4E5F\u653E\u8FDB\u53BB\u4E86\u3002"
+    eventKey: 
+    portrait: {fileID: 21300000, guid: 341e14244c862f944af413b391a3e609, type: 3}

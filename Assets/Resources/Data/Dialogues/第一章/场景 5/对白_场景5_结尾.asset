@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 596e17aa7e335ea4199df2a8fff1334f, type: 3}
+  m_Name: "\u5BF9\u767D_\u573A\u666F5_\u7ED3\u5C3E"
+  m_EditorClassIdentifier: 
+  dialogueId: dialog.sample
+  lines:
+  - speakerName: "\u4ED6"
+    content: "\u8FD9\u91CC\u3002\u9910\u76D8\u62FF\u597D\u4E86\u3002"
+    eventKey: 
+    portrait: {fileID: 21300000, guid: 8f6662e7a91a6324891c77bb2a088bf2, type: 3}
+  - speakerName: "\u4E3B\u89D2"
+    content: "\u2026\u2026"
+    eventKey: 
+    portrait: {fileID: 21300000, guid: 341e14244c862f944af413b391a3e609, type: 3}
+  - speakerName: "\u4ED6"
+    content: "\u53D1\u4EC0\u4E48\u5446\uFF1F\u5FEB\u5750\u554A\u3002"
+    eventKey: 
+    portrait: {fileID: 21300000, guid: 8f6662e7a91a6324891c77bb2a088bf2, type: 3}
+  - speakerName: "\u4E3B\u89D2"
+    content: "\u2026\u2026\u6211\u53BB\u90A3\u8FB9\u3002"
+    eventKey: 
+    portrait: {fileID: 21300000, guid: 341e14244c862f944af413b391a3e609, type: 3}
+  - speakerName: "\u4ED6"
+    content: "\u554A\uFF1F\u8FD9\u4E0D\u6709\u7A7A\u4F4D\u5417\uFF1F"
+    eventKey: 
+    portrait: {fileID: 21300000, guid: 8f6662e7a91a6324891c77bb2a088bf2, type: 3}
+  - speakerName: "\u4E3B\u89D2"
+    content: "\u2026\u2026\u8FD9\u8FB9\u4EBA\u592A\u591A\u4E86\u3002\u592A\u6324\u4E86\u3002"
+    eventKey: 
+    portrait: {fileID: 21300000, guid: 341e14244c862f944af413b391a3e609, type: 3}
+  - speakerName: "\u4ED6"
+    content: "\u201C\u2026\u2026\u54E6\u3002"
+    eventKey: 
+    portrait: {fileID: 21300000, guid: 8f6662e7a91a6324891c77bb2a088bf2, type: 3}
+  - speakerName: "\u4E3B\u89D2os"
+    content: "\u2026\u2026\u90A3\u4E9B\u89C6\u7EBF\u592A\u523A\u773C\u4E86\u3002"
+    eventKey: 
+    portrait: {fileID: 21300000, guid: 341e14244c862f944af413b391a3e609, type: 3}
+  - speakerName: "\u4E3B\u89D2os"
+    content: "\u6216\u8BB8\u5728\u522B\u4EBA\u9762\u524D\u9000\u540E\u4E00\u6B65\uFF0C\u5C31\u5B89\u5168\u4E86\u3002"
+    eventKey: 
+    portrait: {fileID: 21300000, guid: 341e14244c862f944af413b391a3e609, type: 3}

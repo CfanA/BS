@@ -55,7 +55,7 @@ namespace BS.Debugging
         private Vector2 _cluesScroll;
         private Vector2 _puzzleScroll;
 
-        private bool _isVisible = true;
+        private bool _isVisible = false;
         private DebugTab _currentTab;
 
         private string _flagSearch = string.Empty;

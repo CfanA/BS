@@ -21,17 +21,18 @@ namespace BS.Gameplay.Dialogue.UI
         [SerializeField] private Image portraitImage;
         [SerializeField] private GameObject portraitRoot;
 
+        private bool _isSubscribed;
+
         private void Awake()
         {
-            if (dialogueManager == null && GameManager.Instance != null)
-            {
-                dialogueManager = GameManager.Instance.Dialogue;
-            }
+            TryBindDialogueManager();
         }
 
         private void OnEnable()
         {
-            if (dialogueManager == null)
+            TryBindDialogueManager();
+
+            if (dialogueManager == null || _isSubscribed)
             {
                 return;
             }
@@ -39,11 +40,12 @@ namespace BS.Gameplay.Dialogue.UI
             dialogueManager.DialogueStarted += HandleDialogueStarted;
             dialogueManager.LineChanged += HandleLineChanged;
             dialogueManager.DialogueEnded += HandleDialogueEnded;
+            _isSubscribed = true;
         }
 
         private void OnDisable()
         {
-            if (dialogueManager == null)
+            if (dialogueManager == null || !_isSubscribed)
             {
                 return;
             }
@@ -51,6 +53,7 @@ namespace BS.Gameplay.Dialogue.UI
             dialogueManager.DialogueStarted -= HandleDialogueStarted;
             dialogueManager.LineChanged -= HandleLineChanged;
             dialogueManager.DialogueEnded -= HandleDialogueEnded;
+            _isSubscribed = false;
         }
 
         private void Start()
@@ -137,6 +140,14 @@ namespace BS.Gameplay.Dialogue.UI
             }
 
             portraitImage.gameObject.SetActive(hasPortrait);
+        }
+
+        private void TryBindDialogueManager()
+        {
+            if (dialogueManager == null && GameManager.Instance != null)
+            {
+                dialogueManager = GameManager.Instance.Dialogue;
+            }
         }
     }
 }
