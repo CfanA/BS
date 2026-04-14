@@ -15,6 +15,6 @@ MonoBehaviour:
   dialogueId: dialog.sample
   lines:
   - speakerName: "\u4E3B\u89D2"
-    content: "\u8FD8\u6CA1\u62FF\u597D\u4E1C\u897F\u3002"
+    content: "\u597D\u50CF\u5FD8\u8BB0\u4E86\u4EC0\u4E48......"
     eventKey: 
     portrait: {fileID: 21300000, guid: 341e14244c862f944af413b391a3e609, type: 3}

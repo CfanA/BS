@@ -26,7 +26,7 @@ namespace BS.Gameplay.SceneFlow
         {
             if (GameManager.Instance != null && GameManager.Instance.SceneLoader != null)
             {
-                GameManager.Instance.SceneLoader.AfterSceneLoaded += HandleAfterSceneLoaded;
+                GameManager.Instance.SceneLoader.SceneLoaded += HandleSceneLoaded;
             }
         }
 
@@ -34,23 +34,26 @@ namespace BS.Gameplay.SceneFlow
         {
             if (GameManager.Instance != null && GameManager.Instance.SceneLoader != null)
             {
-                GameManager.Instance.SceneLoader.AfterSceneLoaded -= HandleAfterSceneLoaded;
+                GameManager.Instance.SceneLoader.SceneLoaded -= HandleSceneLoaded;
             }
         }
 
-        private void HandleAfterSceneLoaded(SceneId sceneId)
+        private void HandleSceneLoaded(SceneId sceneId)
         {
             if (_spawnRoutine != null)
             {
                 StopCoroutine(_spawnRoutine);
             }
 
-            _spawnRoutine = StartCoroutine(ResolveSpawnRoutine());
+            _spawnRoutine = StartCoroutine(ResolveSpawnRoutine(false));
         }
 
-        private IEnumerator ResolveSpawnRoutine()
+        private IEnumerator ResolveSpawnRoutine(bool waitOneFrame)
         {
-            yield return null;
+            if (waitOneFrame)
+            {
+                yield return null;
+            }
 
             if (GameManager.Instance == null || GameManager.Instance.SceneLoader == null)
             {

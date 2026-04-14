@@ -3,6 +3,7 @@ using BS.Core;
 using BS.Foundation.Ids;
 using BS.Gameplay.Dialogue.Data;
 using BS.Gameplay.Items.Data;
+using BS.Gameplay.SceneActors;
 using UnityEngine;
 
 namespace BS.Gameplay.Story.Actions
@@ -21,7 +22,8 @@ namespace BS.Gameplay.Story.Actions
             PlayDialogue,
             GrantItem,
             OpenDoor,
-            LoadScene
+            LoadScene,
+            PlaySceneActorSequence
         }
 
         [SerializeField] private ActionType actionType;
@@ -46,6 +48,11 @@ namespace BS.Gameplay.Story.Actions
 
         [Header("Load Scene")]
         [SerializeField] private string sceneName;
+
+        [Header("Play Scene Actor Sequence")]
+        [SerializeField] private SceneActor sceneActor;
+        [SerializeField] private SceneActorSequenceAsset sceneActorSequence;
+        [SerializeField] private bool useActorDefaultSequence = true;
 
         public void Execute(GameManager gameManager)
         {
@@ -95,6 +102,22 @@ namespace BS.Gameplay.Story.Actions
                     if (!string.IsNullOrWhiteSpace(sceneName) && gameManager.SceneLoader != null)
                     {
                         gameManager.SceneLoader.LoadScene(new SceneId(sceneName));
+                    }
+                    break;
+
+                case ActionType.PlaySceneActorSequence:
+                    if (sceneActor == null)
+                    {
+                        break;
+                    }
+
+                    if (sceneActorSequence != null)
+                    {
+                        sceneActor.PlaySequence(sceneActorSequence);
+                    }
+                    else if (useActorDefaultSequence)
+                    {
+                        sceneActor.PlayDefaultSequence();
                     }
                     break;
             }

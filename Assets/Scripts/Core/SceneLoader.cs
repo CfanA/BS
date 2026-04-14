@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using BS.Foundation.Ids;
+using BS.Gameplay.Transitions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -39,7 +40,7 @@ namespace BS.Core
     /// </summary>
     public sealed class SceneLoader : MonoBehaviour
     {
-        private static readonly ISceneTransition DefaultTransition = new NoSceneTransition();
+        private static readonly ISceneTransition EmptyTransition = new NoSceneTransition();
 
         private SpawnPointId _pendingSpawnPointId;
 
@@ -89,7 +90,7 @@ namespace BS.Core
             LastRequestedSceneId = sceneId;
             LastRequestedSpawnPointId = targetSpawnPointId;
             _pendingSpawnPointId = targetSpawnPointId;
-            StartCoroutine(LoadSceneRoutine(sceneId, transition ?? DefaultTransition));
+            StartCoroutine(LoadSceneRoutine(sceneId, ResolveTransition(sceneId, transition)));
         }
 
         public bool TryConsumePendingSpawnPoint(out SpawnPointId spawnPointId)
@@ -124,6 +125,21 @@ namespace BS.Core
 
             IsLoading = false;
             AfterSceneLoaded?.Invoke(sceneId);
+        }
+
+        private static ISceneTransition ResolveTransition(SceneId sceneId, ISceneTransition transition)
+        {
+            if (transition != null)
+            {
+                return transition;
+            }
+
+            if (sceneId.IsValid)
+            {
+                return SceneIntroTransition.CreateOrDefault(sceneId);
+            }
+
+            return EmptyTransition;
         }
     }
 }

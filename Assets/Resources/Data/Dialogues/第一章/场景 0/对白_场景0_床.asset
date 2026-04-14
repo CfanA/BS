@@ -15,10 +15,10 @@ MonoBehaviour:
   dialogueId: dialog.sample
   lines:
   - speakerName: "\u4E3B\u89D2"
-    content: "\u6709\u70B9\u4E71\u3002"
+    content: "\u6628\u5929\u7761\u5F97\u5F88\u6C89\uFF0C\u6CA1\u6709\u505A\u68A6\u3002"
     eventKey: 
     portrait: {fileID: 21300000, guid: 341e14244c862f944af413b391a3e609, type: 3}
   - speakerName: "\u4E3B\u89D2"
-    content: "\u8FD8\u662F\u7ED9\u4ED6\u94FA\u5E73\u5427\u3002"
+    content: "\uFF08\u5C06\u88AB\u89D2\u62C9\u5E73\uFF0C\u629A\u5E73\u4E86\u5E8A\u5355\u4E0A\u7684\u5FAE\u5C0F\u8936\u76B1\u3002\uFF09"
     eventKey: 
     portrait: {fileID: 21300000, guid: 341e14244c862f944af413b391a3e609, type: 3}

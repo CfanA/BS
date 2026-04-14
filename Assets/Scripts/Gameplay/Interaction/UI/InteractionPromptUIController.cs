@@ -1,4 +1,5 @@
 using BS.Gameplay.Interaction;
+using BS.Core;
 using TMPro;
 using UnityEngine;
 
@@ -45,8 +46,22 @@ namespace BS.Gameplay.Interaction.UI
             HidePrompt();
         }
 
+        private void Update()
+        {
+            if (IsPromptBlocked())
+            {
+                HidePrompt();
+            }
+        }
+
         private void ShowPrompt(string actionText, string targetName)
         {
+            if (IsPromptBlocked())
+            {
+                HidePrompt();
+                return;
+            }
+
             if (promptRoot != null)
             {
                 promptRoot.SetActive(true);
@@ -64,6 +79,22 @@ namespace BS.Gameplay.Interaction.UI
             {
                 promptRoot.SetActive(false);
             }
+        }
+
+        private static bool IsPromptBlocked()
+        {
+            if (GameManager.Instance == null)
+            {
+                return false;
+            }
+
+            var isSceneLoading = GameManager.Instance.SceneLoader != null
+                                 && GameManager.Instance.SceneLoader.IsLoading;
+
+            var isDialoguePlaying = GameManager.Instance.Dialogue != null
+                                    && GameManager.Instance.Dialogue.IsPlaying;
+
+            return isSceneLoading || isDialoguePlaying;
         }
     }
 }

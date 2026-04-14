@@ -16,9 +16,9 @@ MonoBehaviour:
   lines:
   - speakerName: "\u4E3B\u89D2"
     content: "\u5DEE\u70B9\u5FD8\u4E86\u8FD9\u4E2A\u3002"
-    eventKey: 
+    eventKey: ui_pick_book
     portrait: {fileID: 21300000, guid: 341e14244c862f944af413b391a3e609, type: 3}
   - speakerName: "\u4E3B\u89D2"
-    content: "\u2026\u2026\u4E0A\u6B21\u4ED6\u8BF4\u60F3\u5E26\u4E0A\u7684\u3002"
-    eventKey: ui_pick_book
+    content: "\u4ED6\u8BF4\u60F3\u770B\u8FD9\u4E2A\uFF0C\u4E0D\u80FD\u5FD8\u4E86\u3002"
+    eventKey: 
     portrait: {fileID: 21300000, guid: 341e14244c862f944af413b391a3e609, type: 3}
